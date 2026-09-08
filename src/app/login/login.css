@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Righteous&family=Inter:wght@400;500;600&display=swap');
+
+.login-container {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--gradient-brand);
+  position: relative;
+  overflow: hidden;
+}
+
+.login-card {
+  background: var(--color-bg-surface);
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 420px;
+  position: relative;
+  z-index: 1;
+}
+
+.login-card h1 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  text-align: center;
+  color: var(--color-text-primary);
+  font-family: 'Righteous', sans-serif;
+  font-size: 28px;
+  letter-spacing: 0.5px;
+}
+
+.login-card .login-subtitle {
+  text-align: center;
+  color: var(--color-text-secondary);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  margin-top: 0;
+  margin-bottom: 28px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  font-family: 'Inter', sans-serif;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  font-size: 15px;
+  font-family: 'Inter', sans-serif;
+  box-sizing: border-box;
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-page);
+  transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  background-color: var(--color-bg-surface);
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+}
+
+.login-button {
+  width: 100%;
+  padding: 12px;
+  background: var(--gradient-button);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+.login-button:hover {
+  filter: brightness(0.9);
+  transform: translateY(-1px);
+}
+
+.login-button:disabled {
+  background-color: var(--color-primary-light);
+  cursor: not-allowed;
+  transform: none;
+}
+
+.signup-link {
+  text-align: center;
+  margin-top: 24px;
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+}
+
+.signup-link a {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.signup-link a:hover {
+  color: var(--color-primary-hover);
+  text-decoration: underline;
+}
+
+.error-message {
+  color: var(--color-danger);
+  font-size: 13px;
+  font-family: 'Inter', sans-serif;
+  margin-top: 6px;
+  margin-bottom: 0;
+}
+
+.form-group input.input-error {
+  border-color: var(--color-danger);
+}
+
+.form-group input.input-error:focus {
+  border-color: var(--color-danger);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+}

@@ -1,0 +1,92 @@
+.module-box {
+  background-color: transparent;
+  border: 1px solid transparent;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transform-style: preserve-3d;
+  box-shadow: var(--shadow-sm);
+}
+
+.module-box:hover,
+.module-box:active {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-md);
+}
+
+.module-box:focus-within {
+  transform: none;
+  box-shadow: var(--shadow-sm);
+}
+
+.module-box::before,
+.module-box::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--color-primary);
+  border-radius: 12px;
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0;
+}
+
+.dashboard-area--play .module-box {
+  box-shadow: none;
+  transform: none;
+}
+
+.dashboard-area--play .module-box:hover,
+.dashboard-area--play .module-box:active {
+  box-shadow: none;
+  transform: none;
+}
+
+.dashboard-area--play .module-box::before {
+  animation: module-border-from-left 0.4s ease forwards;
+}
+
+.dashboard-area--play .module-box::after {
+  animation: module-border-from-right 0.4s ease forwards;
+}
+
+@keyframes module-border-from-left {
+  0%   { opacity: 1; clip-path: inset(0 100% 0 0); }
+  100% { opacity: 1; clip-path: inset(0 50% 0 0); }
+}
+
+@keyframes module-border-from-right {
+  0%   { opacity: 1; clip-path: inset(0 0 0 100%); }
+  100% { opacity: 1; clip-path: inset(0 0 0 50%); }
+}
+
+
+.module-item {
+  padding: 8px;
+  margin-bottom: 8px;
+  user-select: none;
+  cursor: grab;
+  display: flex;
+  align-items: center;
+}
+
+.module-item:active {
+  cursor: grabbing;
+}
+
+.module-icon {
+  width: 28px;
+  height: 28px;
+  margin-right: 10px;
+}
+
+.module-label {
+  color: var(--color-text-primary);
+}
+
+.module-box > .react-resizable-handle {
+    z-index: 10;
+    width: 20px;
+    height: 20px;
+}

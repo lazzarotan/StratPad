@@ -1,0 +1,391 @@
+@import url('https://fonts.googleapis.com/css2?family=Righteous&family=Inter:wght@400;500&display=swap');
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--color-bg-surface);
+    padding: 0 40px;
+    height: 64px;
+    border-bottom: 1px solid var(--color-border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar--stratlab {
+    position: sticky;
+    overflow: hidden;
+    transition: height 0.3s ease, padding 0.3s ease, border-bottom-width 0.3s ease;
+}
+
+.navbar--collapsed {
+    height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-bottom-width: 0;
+}
+
+/* ── Hamburger button (hidden on desktop) ── */
+
+.navbar-hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    z-index: 110;
+}
+
+.navbar-hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background-color: var(--color-text-primary);
+    border-radius: 2px;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.navbar-hamburger--open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.navbar-hamburger--open span:nth-child(2) {
+    opacity: 0;
+}
+
+.navbar-hamburger--open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+.navbar-brand a {
+    color: var(--color-text-primary);
+    text-decoration: none;
+    font-size: 22px;
+    font-family: 'Righteous', sans-serif;
+    letter-spacing: 0.5px;
+}
+
+.navbar-brand a:hover {
+    color: transparent;
+    background: var(--gradient-brand);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+.navbar-links {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.navbar-links a {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 6px;
+    transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.navbar-links a:hover {
+    color: var(--color-primary);
+    background-color: var(--color-bg-hover);
+}
+
+/* Active page indicator */
+.navbar-links a.navbar-active {
+    color: var(--color-primary);
+    background-color: transparent;
+    border-bottom: 2px solid var(--color-primary);
+    border-radius: 0;
+    padding-bottom: 4px;
+}
+
+/* Login — ghost style */
+.navbar-links a.navbar-login {
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+    background-color: transparent;
+}
+
+.navbar-links a.navbar-login:hover {
+    background-color: var(--color-bg-hover);
+    color: var(--color-primary-hover);
+    border-color: var(--color-primary-hover);
+}
+
+/* Login active — filled style to indicate current page */
+.navbar-links a.navbar-login.navbar-active {
+    color: var(--color-text-light);
+    background: var(--gradient-button);
+    border: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+    border-radius: 6px;
+    padding-bottom: 6px;
+}
+
+/* Sign Up — ghost style (matches Login) */
+.navbar-links a.navbar-signup {
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+    background-color: transparent;
+    margin-left: 4px;
+}
+
+.navbar-links a.navbar-signup:hover {
+    background-color: var(--color-bg-hover);
+    color: var(--color-primary-hover);
+    border-color: var(--color-primary-hover);
+}
+
+/* Sign Up active — filled style to indicate current page */
+.navbar-links a.navbar-signup.navbar-active {
+    color: var(--color-text-light);
+    background: var(--gradient-button);
+    border: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+    border-radius: 6px;
+    padding-bottom: 6px;
+}
+
+/* Avatar button */
+.navbar-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--gradient-button);
+    color: white;
+    font-family: 'Righteous', sans-serif;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: filter 0.2s ease, transform 0.2s ease;
+    margin-left: 8px;
+}
+
+.navbar-avatar:hover {
+    filter: brightness(0.9);
+    transform: scale(1.05);
+}
+
+.navbar-avatar-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Placeholder shown while session is loading */
+@keyframes navbar-shimmer {
+    0%   { background-position: -200px 0; }
+    100% { background-position: 200px 0; }
+}
+
+.navbar-skeleton {
+    background: linear-gradient(90deg, var(--color-border) 25%, var(--color-border-dark) 50%, var(--color-border) 75%);
+    background-size: 400px 100%;
+    animation: navbar-shimmer 1.4s ease infinite;
+}
+
+.navbar-skeleton--avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    margin-left: 8px;
+    flex-shrink: 0;
+}
+
+.navbar-skeleton--auth {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    background: none;
+    animation: none;
+    margin-left: 8px;
+}
+
+.navbar-skeleton--auth::before,
+.navbar-skeleton--auth::after {
+    content: '';
+    height: 32px;
+    border-radius: 6px;
+    background: linear-gradient(90deg, var(--color-border) 25%, var(--color-border-dark) 50%, var(--color-border) 75%);
+    background-size: 400px 100%;
+    animation: navbar-shimmer 1.4s ease infinite;
+}
+
+.navbar-skeleton--auth::before {
+    width: 52px;
+}
+
+.navbar-skeleton--auth::after {
+    width: 72px;
+}
+
+/* Dropdown container
+.avatar-dropdown {
+    position: relative;
+    margin-left: 8px;
+}
+
+/* The dropdown menu itself */
+.avatar-menu {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    background-color: white;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    min-width: 200px;
+    z-index: 200;
+    overflow: hidden;
+}
+
+/* User info header at top of menu */
+.avatar-menu-header {
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.avatar-menu-name {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--color-text-primary);
+}
+
+.avatar-menu-email {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--color-text-secondary);
+}
+
+/* Divider line between sections */
+.avatar-menu-divider {
+    height: 1px;
+    background-color: var(--color-border);
+}
+
+.avatar-menu-item {
+    display: block;
+    width: 100%;
+    padding: 10px 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    text-align: left;
+    background: none;
+    border: none;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.avatar-menu-item:hover {
+    background-color: var(--color-bg-hover);
+    color: var(--color-primary);
+}
+
+.avatar-menu-logout {
+    color: var(--color-danger);
+}
+
+.avatar-menu-logout:hover {
+    background-color: var(--color-danger-bg);
+    color: var(--color-danger-dark);
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0 20px;
+    }
+
+    .navbar-hamburger {
+        display: flex;
+    }
+
+    .navbar-links {
+        display: flex;
+        position: absolute;
+        top: 64px;
+        left: 0;
+        right: 0;
+        background-color: var(--color-bg-surface);
+        flex-direction: column;
+        align-items: stretch;
+        padding: 0 20px;
+        gap: 4px;
+        border-bottom: 1px solid var(--color-border);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: max-height 0.3s ease, opacity 0.2s ease, padding 0.3s ease;
+    }
+
+    .navbar-links--open {
+        max-height: 400px;
+        opacity: 1;
+        padding: 12px 20px;
+    }
+
+    .navbar-links a {
+        padding: 10px 14px;
+        border-radius: 6px;
+        text-align: left;
+    }
+
+    .navbar-links a.navbar-active {
+        border-bottom: none;
+        background-color: var(--color-bg-hover);
+        border-radius: 6px;
+        padding-bottom: 10px;
+    }
+
+    .navbar-links a.navbar-login,
+    .navbar-links a.navbar-signup {
+        text-align: center;
+        margin-left: 0;
+    }
+
+    .navbar-links a.navbar-login.navbar-active,
+    .navbar-links a.navbar-signup.navbar-active {
+        border-radius: 6px;
+        padding-bottom: 10px;
+    }
+
+    .avatar-dropdown {
+        margin-left: 0;
+    }
+
+    .avatar-menu {
+        position: fixed;
+        top: auto;
+        right: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        padding: 0 14px;
+    }
+
+    .navbar-brand a {
+        font-size: 18px;
+    }
+}

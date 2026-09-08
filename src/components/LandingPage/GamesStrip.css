@@ -1,0 +1,97 @@
+.games-strip {
+    background-color: var(--color-bg-page);
+    padding: 48px 0 40px;
+    border-bottom: 1px solid var(--color-border);
+    overflow: hidden;
+}
+
+.games-strip__tagline {
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    margin: 0 0 24px;
+}
+
+/* ── Scrolling track ── */
+
+.games-strip__track-wrapper {
+    position: relative;
+}
+
+.games-strip__track {
+    display: flex;
+    gap: 12px;
+    width: max-content;
+    animation: games-marquee 35s linear infinite;
+    will-change: transform;
+    backface-visibility: hidden;
+}
+
+.games-strip__track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes games-marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+
+/* ── Individual chip ── */
+
+.games-strip__chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    background-color: white;
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    cursor: default;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    user-select: none;
+}
+
+.games-strip__chip:hover {
+    border-color: var(--color-primary-light);
+    box-shadow: 0 4px 16px rgba(139, 92, 246, 0.15);
+    transform: translateY(-2px);
+}
+
+.games-strip__chip-logo {
+    height: 36px;
+    width: auto;
+    max-width: 120px;
+    object-fit: contain;
+    filter: grayscale(100%);
+    opacity: 0.6;
+    transition: filter 0.2s ease, opacity 0.2s ease;
+}
+
+.games-strip__chip:hover .games-strip__chip-logo {
+    filter: grayscale(0%);
+    opacity: 1;
+}
+
+/* ── Edge fade overlays ── */
+
+.games-strip__fade {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 120px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.games-strip__fade--left {
+    left: 0;
+    background: linear-gradient(to right, var(--color-bg-page), transparent);
+}
+
+.games-strip__fade--right {
+    right: 0;
+    background: linear-gradient(to left, var(--color-bg-page), transparent);
+}

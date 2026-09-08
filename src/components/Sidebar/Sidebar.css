@@ -1,0 +1,120 @@
+.sidebar-shell {
+    display: flex;
+    height: 100%;
+    flex: 0 0 auto;
+}
+
+.sidebar-shell__toggle {
+    width: 32px;
+    min-width: 32px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 10px;
+    border-right: 2px solid var(--color-border);
+    background-color: var(--color-bg-page);
+}
+
+.sidebar-shell__toggle-btn {
+    color: var(--color-primary);
+}
+
+.sidebar {
+    position: relative;
+    width: 160px;
+    min-width: 160px;
+    height: 100%;
+    padding: 12px;
+    border-right: 2px solid var(--color-border);
+    background-color: var(--color-bg-page);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-sizing: border-box;
+    transition: width 0.35s ease, min-width 0.35s ease, padding 0.35s ease, opacity 0.35s ease, border-right-width 0.35s ease;
+}
+
+.sidebar__header {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 6px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid var(--color-border-dark);
+}
+
+.sidebar__name-row {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+}
+
+.sidebar__collapse-row {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.sidebar__collapse-btn {
+    color: var(--color-primary) !important;
+}
+
+.sidebar--visible {
+    opacity: 1;
+}
+
+.sidebar--hidden {
+    width: 0;
+    min-width: 0;
+    padding: 0;
+    border-right-width: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.sidebar__modules {
+    overflow-y: auto;
+    flex: 1;
+    min-height: 0;
+    scrollbar-width: auto;
+}
+
+.sidebar__modules::-webkit-scrollbar {
+    display: none;
+}
+
+.sidebar__name-edit-btn {
+    flex-shrink: 0;
+    color: var(--color-text-secondary) !important;
+}
+
+.sidebar__name-edit-btn:hover {
+    color: var(--color-primary) !important;
+}
+
+.sidebar__name-input {
+    padding: 4px 6px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    background-color: transparent;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    cursor: default;
+    pointer-events: none;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.sidebar__name-input--editing {
+    border-color: var(--color-primary);
+    background-color: white;
+    cursor: text;
+    pointer-events: auto;
+}
+
+.sidebar__name-input--editing:focus {
+    outline: none;
+}

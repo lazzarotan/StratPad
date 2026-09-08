@@ -1,0 +1,38 @@
+.stratlab-mode-toggle {
+    padding: 0;
+    margin-left: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.stratlab-mode-toggle__btn {
+    background: var(--gradient-button);
+    color: var(--color-text-light);
+    border: 1px solid transparent;
+    border-radius: 6px;
+
+    height: 32px;
+    padding: 0 14px;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.stratlab-mode-toggle__btn:hover {
+    filter: brightness(0.9);
+}
+
+.stratlab-mode-toggle__icon {
+    height: 16px;
+    width: 16px;
+    object-fit: contain;
+    filter: invert(1);
+}

@@ -1,0 +1,64 @@
+.dashboard-footer-shell__toggle {
+    display: flex;
+    justify-content: flex-start;
+    border-bottom: 2px solid var(--color-border);
+    background-color: var(--color-bg-page);
+}
+
+.dashboard-footer {
+    margin-left: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+
+.dashboard-footer__left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 0 0 auto;
+    
+}
+
+
+
+.dashboard-footer__center {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.dashboard-footer__right {
+    flex: 0 0 auto;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.dashboard-footer__clone-btn {
+    background-color: transparent;
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+    border-radius: 6px;
+
+    height: 32px;
+    padding: 0 14px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.dashboard-footer__clone-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}

@@ -1,0 +1,379 @@
+.score-table-module {
+    background-color: white;
+    border-radius: 0px;
+    padding: 0px;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Table Container */
+.score-table-container {
+    flex: 1;
+    overflow: auto;
+    border: 1px solid var(--color-border);
+}
+
+/* Table */
+.score-table {
+    width: 100%;
+    min-height: 100%;
+    border-collapse: collapse;
+    font-size: calc(12px * var(--st-scale, 1));
+    table-layout: auto;
+}
+
+/* Headers */
+.score-table thead {
+    background-color: var(--color-primary);
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+.score-table th {
+    padding: calc(4px * var(--st-scale, 1)) calc(6px * var(--st-scale, 1));
+    text-align: center;
+    font-weight: 600;
+    border: 3px solid var(--color-primary-hover);
+}
+
+.round-label-header {
+    background-color: var(--color-primary-hover);
+    width: 1%;
+    white-space: nowrap;
+}
+
+.player-header {
+    min-width: calc(60px * var(--st-scale, 1));
+}
+
+/* Round Labels */
+.round-label {
+    background-color: var(--color-bg-page);
+    font-weight: 600;
+    text-align: center;
+    padding: calc(4px * var(--st-scale, 1)) calc(6px * var(--st-scale, 1));
+    border: 3px solid var(--color-border);
+    white-space: nowrap;
+}
+
+/* Editable Round Names */
+.round-name-text {
+    cursor: pointer;
+    padding: calc(2px * var(--st-scale, 1)) calc(4px * var(--st-scale, 1));
+    border-radius: 3px;
+}
+
+.round-name-text:hover {
+    background-color: var(--color-border);
+}
+
+.round-name-input {
+    width: calc(45px * var(--st-scale, 1));
+    padding: calc(2px * var(--st-scale, 1)) calc(4px * var(--st-scale, 1));
+    border: 3px solid var(--color-primary);
+    border-radius: 3px;
+    font-size: calc(12px * var(--st-scale, 1));
+    font-weight: 600;
+    text-align: center;
+    background-color: white;
+    color: var(--color-text-primary);
+}
+
+.round-name-input:focus {
+    outline: none;
+    border-color: var(--color-primary-hover);
+}
+
+/* Score Cells */
+.score-cell {
+    padding: calc(4px * var(--st-scale, 1)) calc(6px * var(--st-scale, 1));
+    text-align: center;
+    border: 3px solid var(--color-border);
+    background-color: white;
+}
+
+/* Totals Row */
+.score-table tfoot {
+    background-color: var(--color-highlight-light);
+    font-weight: 700;
+}
+
+.score-table tfoot td {
+    padding: calc(4px * var(--st-scale, 1)) calc(6px * var(--st-scale, 1));
+    text-align: center;
+    border: none;
+    border-top: 3px solid var(--color-warning-light);
+    border-right: 3px solid var(--color-warning-light);
+}
+
+.score-table tfoot td:last-child {
+    border-right: 3px solid var(--color-border);
+}
+
+.totals-label {
+    background-color: var(--color-highlight);
+    color: var(--color-highlight-text);
+}
+
+.totals-cell {
+    background-color: var(--color-highlight-light);
+    color: var(--color-highlight-text);
+    font-size: calc(12px * var(--st-scale, 1));
+}
+
+/* Editable Player Names */
+.player-name-text {
+    cursor: pointer;
+    display: block;
+    padding: calc(4px * var(--st-scale, 1));
+    border-radius: 3px;
+    max-width: calc(80px * var(--st-scale, 1));
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.player-name-text:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.player-name-input {
+    width: calc(60px * var(--st-scale, 1));
+    padding: calc(4px * var(--st-scale, 1));
+    border: 3px solid white;
+    border-radius: 3px;
+    font-size: calc(12px * var(--st-scale, 1));
+    font-weight: 600;
+    text-align: center;
+    background-color: white;
+    color: var(--color-text-primary);
+}
+
+.player-name-input:focus {
+    outline: none;
+    border-color: white;
+}
+
+/* Editable Score Cells */
+.score-value {
+    cursor: pointer;
+    display: block;
+    padding: calc(4px * var(--st-scale, 1));
+    border-radius: 3px;
+    min-height: calc(20px * var(--st-scale, 1));
+}
+
+.score-value:hover {
+    background-color: var(--color-bg-page);
+}
+
+.score-input {
+    width: calc(60px * var(--st-scale, 1));
+    padding: calc(4px * var(--st-scale, 1));
+    border: 3px solid var(--color-primary);
+    border-radius: 3px;
+    font-size: calc(12px * var(--st-scale, 1));
+    text-align: center;
+    background-color: white;
+}
+
+.score-input:focus {
+    outline: none;
+    border-color: var(--color-primary-hover);
+}
+
+/* Remove number input arrows */
+.score-input::-webkit-inner-spin-button,
+.score-input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.score-input[type=number] {
+    -moz-appearance: textfield;
+}
+
+/* Player Header Layout */
+.player-header-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: calc(8px * var(--st-scale, 1));
+}
+
+/* Delete Player Button */
+.delete-player-btn {
+    background-color: rgba(239, 68, 68, 0.85);
+    color: white;
+    border: none;
+    border-radius: 3px;
+    width: calc(20px * var(--st-scale, 1));
+    height: calc(20px * var(--st-scale, 1));
+    font-size: calc(16px * var(--st-scale, 1));
+    line-height: 1;
+    cursor: pointer;
+    padding: 0;
+    flex-shrink: 0;
+}
+
+.delete-player-btn:hover {
+    background-color: rgb(220, 38, 38);
+}
+
+/* Add Player Button */
+.add-player-header {
+    background-color: var(--color-primary-hover);
+    border: 1px solid var(--color-primary-hover);
+    padding: 2px;
+    width: calc(24px * var(--st-scale, 1));
+}
+
+.add-player-btn {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px dashed rgba(255, 255, 255, 0.5);
+    border-radius: 4px;
+    width: calc(20px * var(--st-scale, 1));
+    height: calc(20px * var(--st-scale, 1));
+    font-size: calc(14px * var(--st-scale, 1));
+    line-height: 1;
+    cursor: pointer;
+    padding: 0;
+}
+
+.add-player-btn:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.8);
+}
+
+/* Empty Cell */
+.empty-cell {
+    background-color: var(--color-bg-page);
+    border: 3px solid var(--color-border);
+}
+
+/* Round Label Layout */
+.round-label-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: calc(8px * var(--st-scale, 1));
+}
+
+/* Delete Round Button */
+.delete-round-btn {
+    background-color: rgba(239, 68, 68, 0.85);
+    color: white;
+    border: none;
+    border-radius: 3px;
+    width: calc(18px * var(--st-scale, 1));
+    height: calc(18px * var(--st-scale, 1));
+    font-size: calc(14px * var(--st-scale, 1));
+    line-height: 1;
+    cursor: pointer;
+    padding: 0;
+    flex-shrink: 0;
+}
+
+.delete-round-btn:hover {
+    background-color: rgb(220, 38, 38);
+}
+
+/* Add Round Button */
+.add-round-cell {
+    background-color: var(--color-bg-page);
+    border: 3px solid var(--color-border);
+    padding: calc(4px * var(--st-scale, 1)) calc(6px * var(--st-scale, 1));
+    text-align: center;
+}
+
+.add-round-btn {
+    background-color: rgba(139, 92, 246, 0.15);
+    color: var(--color-primary);
+    border: 2px dashed var(--color-primary);
+    border-radius: 4px;
+    width: 100%;
+    height: calc(30px * var(--st-scale, 1));
+    font-size: calc(20px * var(--st-scale, 1));
+    line-height: 1;
+    cursor: pointer;
+    padding: 0;
+}
+
+.add-round-btn:hover {
+    background-color: rgba(139, 92, 246, 0.15);
+    border-color: var(--color-primary-hover);
+}
+
+/* Round Winner */
+.round-winner {
+    background-color: var(--color-highlight-light) !important;
+    font-weight: 600;
+    color: var(--color-highlight-text);
+}
+
+/* Overall Leader */
+.overall-leader {
+    background-color: var(--color-highlight) !important;
+    font-weight: 700;
+    color: var(--color-highlight-text);
+    border: 3px solid var(--color-warning);
+}
+
+/* Editable Title */
+.title-text {
+    cursor: pointer;
+    padding: calc(4px * var(--st-scale, 1)) calc(8px * var(--st-scale, 1));
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.title-text:hover {
+    background-color: var(--color-bg-page);
+}
+
+.title-input {
+    width: 100%;
+    max-width: calc(300px * var(--st-scale, 1));
+    padding: calc(4px * var(--st-scale, 1)) calc(8px * var(--st-scale, 1));
+    border: 3px solid var(--color-primary);
+    border-radius: 4px;
+    font-size: calc(18px * var(--st-scale, 1));
+    font-weight: bold;
+    background-color: white;
+    color: var(--color-text-primary);
+}
+
+.title-input:focus {
+    outline: none;
+    border-color: var(--color-primary-hover);
+}
+
+/* Reset Button */
+.score-table-reset {
+    position: absolute;
+    top: 8px;
+    right: 40px;
+    background: var(--color-warning);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 1;
+    padding: 0;
+    z-index: 10;
+}
+
+.score-table-reset:hover {
+    background: var(--color-warning-dark);
+}

@@ -1,0 +1,18 @@
+.fib-layer {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.fib-icon {
+    position: absolute;
+    opacity: 0.12;
+    transform: translate(var(--rx, 0px), var(--ry, 0px));
+}
+
+.fib-icon img {
+    filter: brightness(0) invert(1);
+    display: block;
+}

@@ -1,0 +1,60 @@
+/* .nested-dict-button__primary {
+    background-color: var(--color-primary)!important;
+    color: var(--color-text-light)!important;
+    border: 1px solid transparent!important;
+    border-radius: 6px!important;
+
+    height: 32px!important;
+    padding: 0 8px!important;
+
+    display: flex!important;
+    align-items: center!important;
+    justify-content: center!important;
+} */
+
+
+.nested-dictionary {
+    background-color: var(--color-bg-module);
+}
+
+/* ── Scaling via --nd-scale ── */
+.nested-dictionary .MuiTypography-root {
+    font-size: calc(14px * var(--nd-scale, 1));
+}
+
+.nested-dictionary .MuiAccordionSummary-root {
+    min-height: calc(40px * var(--nd-scale, 1));
+    padding: 0 calc(12px * var(--nd-scale, 1));
+}
+
+.nested-dictionary .MuiAccordionDetails-root {
+    padding: calc(8px * var(--nd-scale, 1)) calc(12px * var(--nd-scale, 1));
+}
+
+.nested-dictionary .MuiIconButton-root {
+    padding: calc(6px * var(--nd-scale, 1));
+}
+
+.nested-dictionary .MuiSvgIcon-root {
+    font-size: calc(20px * var(--nd-scale, 1));
+}
+
+.nested-dictionary .MuiButton-root {
+    font-size: calc(12px * var(--nd-scale, 1));
+    padding: calc(4px * var(--nd-scale, 1)) calc(8px * var(--nd-scale, 1));
+    min-width: calc(48px * var(--nd-scale, 1));
+}
+
+.nested-dictionary .nested-dict-add-btn {
+    font-size: calc(10px * var(--nd-scale, 1));
+    padding: calc(2px * var(--nd-scale, 1)) calc(6px * var(--nd-scale, 1));
+    min-width: calc(40px * var(--nd-scale, 1));
+}
+
+.nested-dictionary .nested-dict-add-btn .MuiSvgIcon-root {
+    font-size: calc(16px * var(--nd-scale, 1));
+}
+
+.nested-dictionary .nested-dict-add-btn .MuiTypography-root {
+    font-size: calc(11px * var(--nd-scale, 1));
+}

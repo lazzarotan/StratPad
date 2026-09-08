@@ -1,0 +1,448 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum VoteType {
+  up
+  down
+}
+
+enum ReportStatus {
+  pending
+  resolved
+  rejected // as in report rejected, meaning dashboard is good
+}
+
+enum ReportReason {
+  offensive_name
+  offensive_content
+  harassment
+  spam
+  scam_or_phishing
+  copyright
+  other
+}
+
+//ENSURE THESE MATCH:
+  //Modules Table relationship names
+  // '/module_definitions/module_definitions.ts' list of moduleTypes
+enum ModuleType {
+  coinToss
+  counter
+  dice
+  notes
+  scoreTable
+  singleImage
+  spinWheel
+  stopwatch
+  nestedDictionary
+  resourceBar
+  list
+}
+
+enum CoinResult {
+  heads
+  tails
+}
+
+
+model Dashboard {
+  dashboardId  String  @id @default(uuid())
+  ownerId      String
+  copiedFromId String?
+
+  title       String  @db.VarChar(250)
+  description String? @db.VarChar(2500)
+
+  isPublic Boolean @default(false)
+
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @db.Timestamptz(6)
+
+  copiedFrom Dashboard?  @relation("DashboardCopies", fields: [copiedFromId], references: [dashboardId], onUpdate: NoAction)
+  copies     Dashboard[] @relation("DashboardCopies")
+  owner      User        @relation(fields: [ownerId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  dashboardTags DashboardTag[]
+  reports       Report[]
+  subscriptions Subscription[]
+  votes         Vote[]
+  pages         Page[]
+
+  @@index([createdAt])
+  @@index([ownerId])
+  @@index([isPublic])
+}
+
+model DashboardTag {
+  dashboardTagId Int      @id @default(autoincrement())
+  dashboardId    String
+  tagId          Int
+  createdAt      DateTime @default(now()) @db.Timestamptz(6)
+
+  dashboard Dashboard @relation(fields: [dashboardId], references: [dashboardId], onDelete: Cascade, onUpdate: NoAction)
+  tag       Tag       @relation(fields: [tagId], references: [tagId], onDelete: Cascade, onUpdate: NoAction)
+
+  @@unique([dashboardId, tagId])
+  @@index([dashboardId])
+  @@index([tagId])
+}
+
+model Tag {
+  tagId     Int      @id @default(autoincrement())
+  name      String   @unique @db.VarChar(100)
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+
+  dashboardTags DashboardTag[]
+}
+
+model Report {
+  reportId    Int    @id @default(autoincrement())
+  dashboardId String
+  reporterId  String
+
+  reason  ReportReason
+  details String?      @db.VarChar(200)
+  status  ReportStatus @default(pending)
+
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+
+  dashboard Dashboard @relation(fields: [dashboardId], references: [dashboardId], onDelete: Cascade)
+  reporter  User      @relation("UserReports", fields: [reporterId], references: [id], onDelete: Cascade)
+
+  @@unique([reporterId, dashboardId])
+  @@index([status])
+  @@index([dashboardId])
+  @@index([reporterId])
+}
+
+model Subscription {
+  subscriptionId Int    @id @default(autoincrement())
+  userId         String
+  dashboardId    String
+
+  dashboard Dashboard @relation(fields: [dashboardId], references: [dashboardId], onDelete: Cascade, onUpdate: NoAction)
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@unique([userId, dashboardId])
+  @@index([dashboardId])
+  @@index([userId])
+}
+
+model Vote {
+  voteId      Int      @id @default(autoincrement())
+  userId      String   @map("user_id")
+  dashboardId String   @map("dashboard_id")
+  type        VoteType @map("vote_type")
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  dashboard Dashboard @relation(fields: [dashboardId], references: [dashboardId], onDelete: Cascade, map: "fk_votes_dashboard")
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade, map: "fk_votes_user")
+
+  @@unique([userId, dashboardId], map: "uq_votes")
+  @@index([dashboardId], map: "idx_votes_dashboard_id")
+  @@index([userId], map: "idx_votes_user_id")
+  @@map("votes")
+}
+
+model Page {
+  pageId      String @id @default(uuid())
+  dashboardId String
+  name        String @db.VarChar(250)
+  index       Int
+
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @db.Timestamptz(6)
+
+  Dashboard Dashboard @relation(fields: [dashboardId], references: [dashboardId], onDelete: Cascade, onUpdate: NoAction)
+  modules   Module[]
+
+  @@unique([dashboardId, index])
+  @@index([dashboardId])
+}
+
+model Module {
+  moduleId   String     @id @default(uuid())
+  pageId     String
+  moduleType ModuleType
+
+  x Int
+  y Int
+  w Int
+  h Int
+  minW Int @default(1)
+  minH Int @default(1)
+  maxW Int @default(10)
+  maxH Int @default(10)
+
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @db.Timestamptz(6)
+
+  page Page @relation(fields: [pageId], references: [pageId], onDelete: Cascade, onUpdate: NoAction)
+
+  // // module relations
+  notes      NotesModule? @relation("ModuleNotes")
+  stopwatch  StopwatchModule? @relation("ModuleStopwatch")
+  coinToss   CoinTossModule? @relation("ModuleCoinToss")
+  dice       DiceModule? @relation("ModuleDice")
+  counter    CounterModule? @relation("ModuleCounter")
+  scoreTable ScoreTableModule? @relation("ModuleScoreTable")
+  singleImage SingleImageModule? @relation("ModuleSingleImage")
+  spinWheel  SpinWheelModule? @relation("ModuleSpinWheel")
+  nestedDictionary NestedDictionaryModule? @relation("ModuleNestedDictionary")
+  resourceBar      ResourceBarModule? @relation("ModuleResourceBar")
+  list             ListModule? @relation("ModuleList")
+
+  @@index([pageId])
+  @@index([moduleType])
+}
+
+model NotesModule {
+  moduleId String @id
+
+  title String @db.VarChar(250)
+  text  String @db.Text
+
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @db.Timestamptz(6)
+
+  module Module @relation("ModuleNotes", fields: [moduleId], references: [moduleId], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model StopwatchModule {
+  moduleId String @id
+
+  title          String   @default("Stopwatch") @db.VarChar(250)
+  mode           String   @default("stopwatch") @db.VarChar(20)
+  timerMinutes   Int      @default(5)
+  timerSeconds   Int      @default(0)
+  elapsedSeconds Int      @default(0)
+  startedAt      BigInt?
+
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @db.Timestamptz(6)
+
+  module Module @relation("ModuleStopwatch", fields: [moduleId], references: [moduleId], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model CoinTossModule {
+  moduleId String @id
+
+  title      String      @default("Coin Toss") @db.VarChar(250)
+  result CoinResult?
+
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @db.Timestamptz(6)
+
+  module Module @relation("ModuleCoinToss", fields: [moduleId], references: [moduleId], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model DiceModule {
+  moduleId String @id
+
+  title    String   @default("Dice") @db.VarChar(250)
+  dice     Json     @default("[]") @db.Json
+  modifier Int      @default(0)
+
+
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @db.Timestamptz(6)
+
+  module Module @relation("ModuleDice", fields: [moduleId], references: [moduleId], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model CounterModule {
+  moduleId String @id
+
+  title        String @default("Counter") @db.VarChar(250)
+  value        Int    @default(0)
+  defaultValue Int    @default(0)
+  increment    Int    @default(1)
+  min          Int?
+  max          Int?
+  prefix       String? @default ("") @db.VarChar(4)
+  suffix       String? @default ("") @db.VarChar(4)
+
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @db.Timestamptz(6)
+
+  module Module @relation("ModuleCounter", fields: [moduleId], references: [moduleId], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model ScoreTableModule {
+  moduleId String @id
+
+  title        String @default("Game Score") @db.VarChar(250)
+  currentRound Int    @default(0)
+  players      Json @default("[\"Player 1\", \"Player 2\"]") @db.Json
+  scores       Json @default("[[null, null, null], [null, null, null]]") @db.Json
+  roundNames   Json @default("[\"Round 1\", \"Round 2\", \"Round 3\"]") @db.Json
+
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @db.Timestamptz(6)
+
+  module Module @relation("ModuleScoreTable", fields: [moduleId], references: [moduleId], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model SingleImageModule {
+  moduleId String @id
+
+  title String @default("Image") @db.VarChar(250)
+
+  imageAssetId Int?
+  imageAsset   ImageAsset? @relation(fields: [imageAssetId], references: [imageAssetId], onDelete: SetNull)
+
+  module Module @relation("ModuleSingleImage", fields: [moduleId], references: [moduleId], onDelete: Cascade, onUpdate: NoAction)
+
+}
+
+model SpinWheelModule {
+  moduleId String @id
+
+  title String @default("Spin Wheel") @db.VarChar(250)
+  segments Json @default("[\"1\", \"2\", \"3\", \"4\"]") @db.Json
+
+  module Module @relation("ModuleSpinWheel", fields: [moduleId], references: [moduleId], onDelete: Cascade, onUpdate: NoAction)
+}
+
+
+model NestedDictionaryModule {
+  moduleId String @id
+  title String @default("Nested Dictionary") @db.VarChar(250)
+  dictionary Json @default("{}") @db.Json
+  linksOnlyInDropdown Boolean @default(true)
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @db.Timestamptz(6)
+  module Module @relation("ModuleNestedDictionary", fields: [moduleId], references: [moduleId], onDelete: Cascade, onUpdate: NoAction)
+}
+
+
+model ResourceBarModule {
+  moduleId String @id
+
+  title String @default("Resource Bar") @db.VarChar(250)
+  bars  Json   @default("[]") @db.Json
+
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @db.Timestamptz(6)
+
+  module Module @relation("ModuleResourceBar", fields: [moduleId], references: [moduleId], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model ListModule {
+  moduleId String @id
+
+  title        String  @default("List") @db.VarChar(250)
+  showCheckbox Boolean @default(true)
+  showQuantity Boolean @default(true)
+  items        Json    @default("[]") @db.Json
+
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @db.Timestamptz(6)
+
+  module Module @relation("ModuleList", fields: [moduleId], references: [moduleId], onDelete: Cascade, onUpdate: NoAction)
+}
+
+////////////////////////////////////
+//All image assets (Image modules reference these)
+
+model ImageAsset {
+  imageAssetId Int @id @default(autoincrement())
+
+  storageKey String //Removed unique - architechture is: "Multiple owners pointing to same blob. Chron jobs clean up unowned stuff later."
+  byteSize   Int
+  width      Int
+  height     Int
+  createdAt  DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt  DateTime @updatedAt @db.Timestamptz(6)
+
+  ownerId     String
+  owner       User        @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+
+  singleImageModules SingleImageModule[]
+  @@index([ownerId])
+}
+
+
+
+// BETTER AUTH TABLES
+
+model User {
+  id              String   @id
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  name            String
+  email           String   @unique
+  emailVerified   Boolean  @default(false)
+  image           String?
+  username        String?
+  displayUsername String?
+  role            String   @default("user")
+
+  sessions      Session[]
+  accounts      Account[]
+  dashboards    Dashboard[]
+  votes         Vote[]
+  subscriptions Subscription[]
+  reports       Report[]       @relation("UserReports")
+  imageAssets ImageAsset[]
+
+  @@map("users")
+}
+
+model Session {
+  id        String   @id
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  expiresAt DateTime
+  token     String   @unique
+  ipAddress String?
+  userAgent String?
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("sessions")
+}
+
+model Account {
+  id        String   @id
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  accountId             String
+  providerId            String
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("accounts")
+}
+
+model Verification {
+  id        String   @id
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  identifier String
+  value      String
+  expiresAt  DateTime
+
+  @@index([identifier])
+  @@map("verifications")
+}

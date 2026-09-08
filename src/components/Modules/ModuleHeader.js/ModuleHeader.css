@@ -1,0 +1,89 @@
+.module-header {
+    display: flex;
+    align-items: center;
+    background-color: var(--color-border);
+    /* padding: 4px 6px; */
+    cursor: grab;
+    gap: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+    min-height: 34px;
+    container-type: inline-size;
+}
+
+.module-header:active {
+    cursor: grabbing;
+}
+
+.module-header--play {
+    cursor: default;
+}
+
+.module-header--play:active {
+    cursor: default;
+}
+
+.module-header__title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: calc(100% - 180px);
+    border: none;
+    background: transparent;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    padding: 2px 4px;
+    text-align: center;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: default;
+    pointer-events: auto;
+}
+
+@container (max-width: 200px) {
+    .module-header__title {
+        display: none;
+    }
+}
+
+.module-header__title--editing {
+    cursor: text;
+    outline: none;
+    background-color: var(--color-bg-surface);
+    border-radius: 3px;
+}
+
+.module-header__actions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: auto;
+    font-size: 25px; /* SIZE OF RESET BUTTON */
+}
+
+.module-header__btn {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 2px;
+    display: flex;
+    align-items: center;
+}
+
+/* SIZE OF GEAR BUTTON */
+.module-header__btn img {
+    width: 25px;
+    height: 25px;
+}
+
+.module-header__btn--remove {
+    font-size: 25px; /* SIZE OF REMOVE BUTTON */
+    color: var(--color-text-secondary);
+}
+
+.module-header__btn--remove:hover {
+    color: var(--color-danger);
+}

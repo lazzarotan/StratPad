@@ -1,0 +1,99 @@
+
+:root {
+  /* ── Primary (purple) ── */
+  --color-primary: #8b5cf6;
+  --color-primary-hover: #7c3aed;
+  --color-primary-light: #a78bfa;
+  --color-primary-disabled: #c4b5fd;
+
+  /* ── Secondary (blue) ── */
+  --color-secondary: #3b82f6;
+  --color-indigo: #6366f1;
+
+  /* ── Gradients ── */
+  --gradient-brand: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
+  --gradient-button: linear-gradient(135deg, #8b5cf6, #6366f1);
+
+  /* ── Text ── */
+  --color-text-primary: #1f2937;
+  --color-text-secondary: #6b7280;
+  --color-text-label: #4b5563;
+  --color-text-on-dark: rgba(255, 255, 255, 0.75);
+  --color-text-light: #ffffff;
+
+  /* ── Backgrounds ── */
+  --color-bg-page: #f9fafb;
+  --color-bg-module: #ffffff;
+  --color-bg-surface: #ffffff;
+  --color-bg-hover: #f5f3ff;
+  --color-bg-hover-alt: #ede9fe;
+  --color-bg-disabled: #d1d5db;
+
+  /* ── Borders ── */
+  --color-border: #e5e7eb;
+  --color-border-dark: #d1d5db;
+
+  /* ── Danger / Error ── */
+  --color-danger: #ef4444;
+  --color-danger-dark: #dc2626;
+  --color-danger-darker: #b91c1c;
+  --color-danger-light: #fca5a5;
+  --color-danger-bg: #fef2f2;
+  --color-danger-border: #fecaca;
+
+  /* ── Success ── */
+  --color-success: #10b981;
+
+  /* ── Warning ── */
+  --color-warning: #f59e0b;
+  --color-warning-dark: #d97706;
+  --color-warning-light: #fbbf24;
+
+  /* ── Highlight (score table) ── */
+  --color-highlight: #fcd34d;
+  --color-highlight-light: #fef3c7;
+  --color-highlight-text: #78350f;
+
+  /* ── Shadows ── */
+  --shadow-sm: 0 4px 8px rgba(0, 0, 0, 0.15);
+  --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 12px 32px rgba(139, 92, 246, 0.15);
+  --shadow-purple: 0 4px 16px rgba(139, 92, 246, 0.35);
+  --shadow-focus: 0 0 0 3px rgba(139, 92, 246, 0.12);
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.app-wrapper {
+  position: relative;
+}
+
+.app-layout {
+  display: flex;
+  height: calc(100vh - 64px);
+  gap: 5px;
+  overflow: hidden;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+  min-width: 0;
+}
+
+.stratlab-mode-toggle {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+}
+
+.stratlab-mode-toggle button {
+  cursor: pointer;
+  padding: 6px 10px;
+}

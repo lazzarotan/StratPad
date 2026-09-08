@@ -1,0 +1,13 @@
+/*
+  Widen dropdown as we have more stuff to display
+*/
+.node-selector-tree-popup {
+  min-width: 200px;
+  width: max-content;
+  max-width: min(100vw - 24px, 720px);
+}
+
+.node-selector-tree-popup .ant-select-tree-title {
+  white-space: nowrap;
+}
+

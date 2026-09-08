@@ -1,0 +1,32 @@
+.save-button-container {
+    padding: 0;
+    margin-left: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.save-button {
+    background: var(--gradient-button);
+    color: var(--color-text-light);
+    border: 1px solid transparent;
+    border-radius: 6px;
+
+    height: 32px;
+    padding: 0 14px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.2;
+
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.save-button:hover {
+    filter: brightness(0.9);
+}

@@ -1,0 +1,160 @@
+.resource-bar-module {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: var(--color-bg-module);
+}
+
+.resource-bar-module__body {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: calc(8px * var(--rb-scale, 1));
+    display: flex;
+    flex-direction: column;
+    gap: calc(10px * var(--rb-scale, 1));
+}
+
+/* ── Individual bar ── */
+.resource-bar {
+    display: flex;
+    flex-direction: column;
+    gap: calc(4px * var(--rb-scale, 1));
+}
+
+/* Label row: name left, value right */
+.resource-bar__label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.resource-bar__label {
+    font-weight: 600;
+    font-size: calc(13px * var(--rb-scale, 1));
+    color: var(--color-text-primary);
+    max-width: 15ch;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-right: 2px;
+}
+
+.resource-bar__value-text {
+    font-size: calc(12px * var(--rb-scale, 1));
+    color: var(--color-text-secondary);
+    font-variant-numeric: tabular-nums;
+}
+
+
+.resource-bar__controls {
+    display: flex;
+    gap: calc(6px * var(--rb-scale, 1));
+    align-items: center;
+}
+
+/* The grey background track */
+.resource-bar__track {
+    flex: 1;
+    height: calc(18px * var(--rb-scale, 1));
+    background-color: var(--color-border);
+    border-radius: calc(9px * var(--rb-scale, 1));
+    overflow: hidden;
+    border: 1px solid var(--color-border-dark);
+}
+
+/* The colored fill */
+.resource-bar__fill {
+    height: 100%;
+    border-radius: calc(9px * var(--rb-scale, 1));
+    transition: width 0.3s ease;
+    position: relative;
+    overflow: visible;
+}
+
+.resource-bar__wave {
+    position: absolute;
+    right: calc(-6px * var(--rb-scale, 1));
+    top: calc(-3px * var(--rb-scale, 1));
+    width: calc(24px * var(--rb-scale, 1));
+    height: calc(24px * var(--rb-scale, 1));
+    background: var(--bar-color);
+    border-radius: 40%;
+    animation: slosh 2s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes slosh {
+    0%   { transform: rotate(0deg)   translateX(calc(0px * var(--rb-scale, 1)));  }
+    25%  { transform: rotate(90deg)  translateX(calc(2px * var(--rb-scale, 1)));  }
+    50%  { transform: rotate(180deg) translateX(calc(0px * var(--rb-scale, 1)));  }
+    75%  { transform: rotate(270deg) translateX(calc(-2px * var(--rb-scale, 1))); }
+    100% { transform: rotate(360deg) translateX(calc(0px * var(--rb-scale, 1)));  }
+}
+
+.resource-bar__btn {
+    width: calc(28px * var(--rb-scale, 1));
+    height: calc(28px * var(--rb-scale, 1));
+    border: 1px solid var(--color-border);
+    border-radius: calc(6px * var(--rb-scale, 1));
+    background-color: var(--color-bg-surface);
+    color: var(--color-text-primary);
+    font-size: calc(16px * var(--rb-scale, 1));
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.15s ease;
+}
+
+.resource-bar__btn:hover {
+    background-color: var(--color-bg-hover);
+}
+
+.resource-bar__btn:active {
+    background-color: var(--color-bg-hover-alt);
+}
+
+/* Direct value input */
+.resource-bar__value-input {
+    width: calc(60px * var(--rb-scale, 1));
+    font-size: calc(12px * var(--rb-scale, 1));
+    text-align: right;
+    border: 1px solid var(--color-primary);
+    border-radius: calc(4px * var(--rb-scale, 1));
+    padding: calc(1px * var(--rb-scale, 1)) calc(4px * var(--rb-scale, 1));
+    outline: none;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Direct label input */
+.resource-bar__label-input {
+    width: calc(140px * var(--rb-scale, 1));
+    font-size: calc(13px * var(--rb-scale, 1));
+    font-weight: 600;
+    border: 1px solid var(--color-primary);
+    border-radius: calc(4px * var(--rb-scale, 1));
+    padding: calc(1px * var(--rb-scale, 1)) calc(4px * var(--rb-scale, 1));
+    outline: none;
+    color: var(--color-text-primary);
+}
+
+/* Add bar button */
+.resource-bar__add-btn {
+    width: 100%;
+    padding: calc(6px * var(--rb-scale, 1));
+    border: 2px dashed var(--color-border);
+    border-radius: calc(8px * var(--rb-scale, 1));
+    background: transparent;
+    color: var(--color-text-secondary);
+    font-size: calc(12px * var(--rb-scale, 1));
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.resource-bar__add-btn:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+}

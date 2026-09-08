@@ -1,0 +1,61 @@
+.notes {
+    padding: 0px;
+    background: var(--color-bg-module);
+    border-radius: 0px;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    color: var(--color-text-primary);
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+.notes-body {
+    flex: 1;
+    min-height: 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.rsw-editor {
+    flex: 1;
+    min-height: 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.notes-textarea {
+    width: 100%;
+    flex: 1;
+    min-height: 0;
+    min-width: 0;
+    box-sizing: border-box;
+    resize: none;
+    border: 1px solid var(--color-text-secondary);
+    border-radius: 6px;
+    padding: 8px;
+    overflow: auto;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.rsw-toolbar {
+    padding: 0px !important;
+    background-color: var(--color-bg-module) !important;
+}
+
+.rsw-toolbar button {
+    padding: 0px 5px !important;
+    min-width: 15px !important;
+    height: 15px !important;
+    font-size: 12px !important;
+}
+
+.rsw-toolbar svg {
+    width: 16px !important;
+    height: 16px !important;
+}
