@@ -8,12 +8,19 @@ https://github.com/user-attachments/assets/bdba29ed-ba6f-4053-af02-77d03f9aecbb
 
 ## Screenshots
 **A Dashboard in Edit Mode**
+
 <img width="649" height="428" alt="Screenshot 2026-04-24 163315" src="https://github.com/user-attachments/assets/efadd525-cdec-4269-ad59-6b92f70d36d9" />
+
 **A Dashboard in Play Mode**
+
 <img width="465" height="274" alt="Dashboard" src="https://github.com/user-attachments/assets/1b761889-d2c8-44db-87ed-81758d7c4e7a" />
+
 **Home Page**
+
 <img width="956" height="474" alt="Screenshot 2026-04-24 163458" src="https://github.com/user-attachments/assets/0e0400ac-ecab-423b-83fc-9423a0e69050" />
+
 **Community Page**
+
 <img width="563" height="387" alt="Screenshot 2026-04-24 163409" src="https://github.com/user-attachments/assets/6b1a2517-5022-4fb2-bd79-4feda0d0fa6d" />
 
 ---
